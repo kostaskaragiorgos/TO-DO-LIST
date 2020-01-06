@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+        <title>To Do</title>
+
+    </head>
+
+    <body>
+
+        <div id="app"></div>
+
+        <script type="text/babel">
+
+            class App extends React.Component {
+
+                constructor(props) {
+
+                    super(props);
+
+                    this.state = {
+                        tasks: [],
+
+                        input: ""
+                    };
+                }
+
+                render() {
+
+                    return (
+
+                        <div>
+
+                            <div>
+                                <input onChange={this.userinput} value={this.state.input} />
+
+                                <button onClick={this.addTask}>Add To Do</button>
+
+                                <button onClick={this.cleartodo}> Clear To Do </button>
+                            </div>
+
+                            <h1>To Do</h1>
+                            
+                            <ul>
+                                {this.state.tasks.map((task, i) =>
+                                    <li key={i}>
+                                        {task}
+                                    </li>
+                                )}
+                            </ul>
+                            
+                        </div>
+                    );
+                }
+
+                userinput = (event) => {
+                    this.setState({
+                        input: event.target.value
+                    });
+                }
+
+                cleartodo = () => {
+                    this.setState(state => ({
+                        tasks : []
+                    }))
+
+                }
+
+                addTask = () => {
+                    this.setState(state => ({
+                        tasks: [...state.tasks, state.input],
+                        
+
+                    }))
+
+                    this.setState(state => ({
+                        input: ""
+                        
+
+                    }))
+                }
+            }
+
+            ReactDOM.render(<App />, document.querySelector("#app"));
+
+        </script>
+    </body>
+</html>
